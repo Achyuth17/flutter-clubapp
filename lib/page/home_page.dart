@@ -1,12 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_signin_example/page/user_page.dart';
 import 'package:google_signin_example/provider/google_sign_in.dart';
 import 'package:google_signin_example/widget/background_painter.dart';
 import 'package:google_signin_example/widget/logged_in_widget.dart';
 import 'package:google_signin_example/widget/sign_up_widget.dart';
 import 'package:provider/provider.dart';
 
+
 class HomePage extends StatelessWidget {
+
+  // addDataToFirebase() {
+  //   Map<String, dynamic> userData = {
+  //     "name": FirebaseAuth.instance.currentUser.displayName,
+  //     'email-ID': FirebaseAuth.instance.currentUser.email,
+  //   };
+  //
+  //   CollectionReference collectionReference = Firestore.instance.collection(
+  //       'users');
+  //   collectionReference.add(userData);
+  // }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: ChangeNotifierProvider(
@@ -19,7 +33,8 @@ class HomePage extends StatelessWidget {
               if (provider.isSigningIn) {
                 return buildLoading();
               } else if (snapshot.hasData) {
-                return LoggedInWidget();
+                // addDataToFirebase();
+                return UserPage(user: FirebaseAuth.instance,);
               } else {
                 return SignUpWidget();
               }

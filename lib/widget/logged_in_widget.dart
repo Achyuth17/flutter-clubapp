@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_signin_example/page/about_user_page.dart';
 import 'package:google_signin_example/provider/google_sign_in.dart';
 import 'package:provider/provider.dart';
+import '../page/user_page.dart';
 
 class LoggedInWidget extends StatelessWidget {
   @override
@@ -36,13 +38,19 @@ class LoggedInWidget extends StatelessWidget {
           ),
           SizedBox(height: 8),
           ElevatedButton(
+            child: Text('Logout'),
             onPressed: () {
               final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.logout();
             },
-            child: Text('Logout'),
-          )
+          ),
+          ElevatedButton(
+            child: Text('Go To MAIN PAGE'),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUserPage(user: FirebaseAuth.instance,)));
+            },
+          ),
         ],
       ),
     );
